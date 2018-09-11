@@ -3,7 +3,7 @@
 
     if (isset($_SESSION['u_id'])) {
     
-        echo "<p class='success'>".$_SESSION['u_first'].", you are logged in.</p>";
+        echo "<div class='alert alert-success'>".$_SESSION['u_first'].", you are logged in.</div>";
         echo '<form action="includes/logout.inc.php" method="POST">';
         echo '<button type="submit" name="submit">Logout</button>';
     }
@@ -12,7 +12,10 @@
 <head>
     <title>Signup</title>
 </head>
-
+<br>
+<br>
+<br>
+<br>
 <h2>Signup</h2>
 <form action="includes/signup.inc.php" method="POST">
     <?php
@@ -65,19 +68,19 @@ if (!isset($_GET['signup'])) {
     $signupCheck = $_GET['signup'];
 
     if ($signupCheck == "empty") {
-        echo "<p class='error'>You did not complete all fields</p>";
+        echo "<div class='alert alert-warning'>You did not complete all fields</div>";
         exit();
     }
     elseif ($signupCheck == "char") {
-        echo "<p class='error'>You used invalid characters</p>";
+        echo "<div class='alert alert-warning'>You used invalid characters</div>";
         exit();
     }
     elseif ($signupCheck == "invalid-email") {
-        echo "<p class='error'>You used an invalid email</p>";
+        echo "<div class='alert alert-warning'>You used an invalid email</div>";
         exit();
     }
     elseif ($signupCheck == "success") {
-        echo "<p class='success'>You have been signed up!</p>";
+        echo "<div class='alert alert-success'>You have been signed up!</div>";
         exit();
     }
 }
