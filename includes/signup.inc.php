@@ -15,17 +15,17 @@ if (isset($_POST['submit'])) {
     // check all fields contain data
     if (empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd)) {
         // if any empty field, redirect to index
-        header("Location: signup.php?signup=empty");
+        header("Location: ../signup.php?signup=empty");
         exit();
         } else {
             // Check input characters are valid
             if (!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last)) {
-            header("Location: signup.php?signup=char&first=$first&last=$last&email=$email&uid=$uid");
+            header("Location: ../signup.php?signup=char&first=$first&last=$last&email=$email&uid=$uid");
             exit();
             } else {
             // validate email, if not valid then redirect with error
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                    header("Location: signup.php?signup=invalid-email&first=$first&last=$last&uid=$uid");
+                    header("Location: ../signup.php?signup=invalid-email&first=$first&last=$last&uid=$uid");
                     exit(); 
                 } else {
                     // check username not already taken

@@ -12,7 +12,7 @@ if (isset($_SESSION['u_id'])) {
     echo 
     '<form action="includes/logout.inc.php" method="POST">
     <button type="submit" name="submit">Logout</button>';
-    echo "<p class='success'>You have been logged in.</p>";
+    echo "<p class='success'>".$_SESSION['u_first'].", you are logged in.</p>";
 } else {
     echo '
     <form action="includes/login.inc.php" method="POST">
@@ -27,7 +27,17 @@ if (isset($_SESSION['u_id'])) {
 
 
 if (!isset($_GET['login'])) {
-    exit();
+    if (!isset($_GET['signup'])) {
+        exit();
+    } else {
+        $signupCheck = $_GET['signup'];
+    
+        if ($signupCheck == "success") {
+            echo "<p class='success'>You have been signed up! Please Login.</p>";
+            exit();
+        }
+    }
+    
 } else {
     $loginCheck = $_GET['login'];
 
@@ -40,16 +50,9 @@ if (!isset($_GET['login'])) {
     }
 }
 
-if (!isset($_GET['signup'])) {
-    exit();
-} else {
-    $signupCheck = $_GET['signup'];
 
-    if ($signupCheck == "success") {
-        echo "<p class='success'>You have been signed up! Please Login.</p>";
-        exit();
-    }
-}
+
+
 
 ?>
 </div>
