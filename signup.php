@@ -16,47 +16,77 @@
 <br>
 <br>
 <br>
-<h2>Signup</h2>
-<form action="includes/signup.inc.php" method="POST">
+
+<div class="container">
+    <div class="row">
+        <div class='col-6'>
+        <h2>Signup</h2>
+        <form action="includes/signup.inc.php" method="POST">
     <?php
         // if the form is submitted with an error, use the GET method to return the form data back to the form
         if (isset($_GET['first'])) {
         $first = $_GET['first'];   
         // Note the syntax for placing the variable into the value attribute
-        echo '<input type="text" name="first" placeholder="Firstname" value="'.$first.'">';
+        echo '<div class="form-group">
+            <label for="Firstname">Firstname</label>
+            <input type="text" class="form-control" name="first" id="Firstname" placeholder="Firstname" value="'.$first.'">
+            </div>';
         } 
         else {
-        echo '<input type="text" name="first" placeholder="Firstname">';
+        echo '<div class="form-group">
+            <label for="Firstname">Firstname</label>
+            <input type="text" class="form-control" name="first" id="Firstname" placeholder="Firstname">
+            </div>';
         }
 
         if (isset($_GET['last'])) {
         $last = $_GET['last'];   
-        echo '<input type="text" name="last" placeholder="Lastname" value="'.$last.'">';
+        echo '<div class="form-group">
+            <label for="Lastname">Lastname</label>
+            <input type="text" class="form-control" name="last" id="Lastname" placeholder="Lastname" value="'.$last.'">
+            </div>';
         } 
         else {
-        echo '<input type="text" name="last" placeholder="Lastname">';
+        echo '<div class="form-group">
+            <label for="Lastname">Lastname</label>
+            <input type="text" class="form-control" name="last" id="Lastname" placeholder="Lastname">
+            </div>';
         }
     
         if (isset($_GET['email'])) {
         $email = $_GET['email'];   
-        echo '<input type="text" name="email" placeholder="Email" value="'.$email.'">';
+        echo '<div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" name="email" id="Email" placeholder="Email" value="'.$email.'">
+        </div>';
         } 
         else {
-        echo '<input type="text" name="email" placeholder="Email">';
+        echo '<div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" name="email" id="Email" placeholder="Email">
+        </div>';
         }
 
         if (isset($_GET['uid'])) {
         $uid = $_GET['uid'];   
-        echo '<input type="text" name="uid" placeholder="Username" value="'.$uid.'">';
+        echo '<div class="form-group">
+        <label for="Username">Username</label>
+        <input type="text" class="form-control" name="uid" id="Username" placeholder="Username" value="'.$uid.'">
+        </div>';
         } 
         else {
-        echo '<input type="text" name="uid" placeholder="Username">';
+        echo '<div class="form-group">
+        <label for="Username">Username</label>
+        <input type="text" class="form-control" name="uid" id="Username" placeholder="Username">
+        </div>';
         }
     ?>
     <!-- Chosen not to return the password to the form -->
-    <input type="password" name="pwd" placeholder="Password">
-    <br>
-    <button type="submit" name="submit">Submit</button>
+    <div class="form-group">
+        <label for="Password">Password</label><br>
+        <input type="password" class="form-control" name="pwd" id="Password" placeholder="Password">
+    </div>
+        <button class="btn btn-primary" type="submit" name="submit">Submit</button>
 </form>
 
 <?php
@@ -88,6 +118,9 @@ if (!isset($_GET['signup'])) {
 
 
 ?>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
