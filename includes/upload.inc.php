@@ -13,29 +13,34 @@ if (!isset($_POST['submit'])) {
     $fileError = $_FILES['file']['error'];
     $fileType = $_FILES['file']['type'];
     
+
     // control allowable file types for upload
     $fileExt = explode('.', $fileName);
     $fileActualExt = strtolower(end($fileExt));
 
     $allowed = array('jpg', 'jpeg', 'png', 'pdf');
 
-    if (!in_array($fileActualExt, $allowed)) {
-        header("Location: upload-files.php?upload=type");
-    } else {
-        if ($fileError === 0) {
-            if ($fileSize > 50000) {
-                    header("Location: upload-files.php?upload=large");
-            } else {
+    if (in_array($fileActualExt, $allowed)) {
+        if ($fileSize < 512000) {
+            if ($fileError === 0) {
                 // now upload the file
-                // give the file a unique name to prevent duplicates
+                // give the file a unique name to prevent duplicates/overwrite
                 $fileNameNew = uniqid('', TRUE).".".$fileActualExt;
                 // set up upload destination
-                $fileDestination = "uploads/".$fileNameNew;
+                $fileDestination = "../uploads/".$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
-                header("Location: upload-files.php?upload=success");
+                header("Location: ../uploads.php?upload=success");
+            } else {    
+                header("Location: ../uploads.php?upload=fileerror");
             }
         } else {
-            header("Location: upload-files.php?upload=error");
+            header("Location: ../uploads.php?upload=large");
         }
+    } else {
+        header("Location: ../uploads.php?upload=type");
     }
 }
+    
+
+
+?>

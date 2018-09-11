@@ -11,9 +11,7 @@
     <input type="file" class="form-control-file" name="file"><br>
     <button type="submit" class="btn btn-primary" name="submit">UPLOAD</button>
 </form>
-</div>
-</div>
-</div>
+<br>
 <?php
 
 if (!isset($_GET['upload'])) {
@@ -22,22 +20,25 @@ if (!isset($_GET['upload'])) {
     $uploadCheck = $_GET['upload'];
 
     if ($uploadCheck == "large") {
-        echo "<p class='error'>File too large!</p>";
+        echo "<p class='alert alert-warning'>File too large!</p>";
         exit();
     }
     elseif ($uploadCheck == "type") {
-        echo "<p class='error'>That file type is not allowed.</p>";
+        echo "<p class='alert alert-warning'>That file type is not allowed.</p>";
         exit();
     }
-    elseif ($uploadCheck == "error") {
-        echo "<p class='error'>There was an error uploading your file.</p>";
+    elseif ($uploadCheck == "fileerror") {
+        echo "<p class='alert alert-warning'>There was an error uploading your file.</p>";
         exit();
     }
     elseif ($uploadCheck == "success") {
-        echo "<p class='success'>File upload successful!</p>";
+        echo "<p class='alert alert-success'>File upload successful!</p>";
         exit();
     }
 
 }
 
 ?>
+</div>
+</div>
+</div>
