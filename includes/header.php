@@ -42,7 +42,7 @@
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Links</a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="uploads.php">Upload Files</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="upload-profile.php">Upload Profile Image</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>

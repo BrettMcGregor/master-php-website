@@ -1,5 +1,7 @@
 <?php
-
+session_start();
+include_once 'db.inc.php';
+$id = $_SESSION['u_id']; // unique user identifier
 
 if (!isset($_POST['submit'])) {
     echo "Error.";
@@ -25,11 +27,16 @@ if (!isset($_POST['submit'])) {
             if ($fileError === 0) {
                 // now upload the file
                 // give the file a unique name to prevent duplicates/overwrite
-                $fileNameNew = uniqid('', TRUE).".".$fileActualExt;
+                $fileNameNew = "profile".$id.".".$fileActualExt;
                 // set up upload destination
                 $fileDestination = "../uploads/".$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
-                header("Location: ../uploads.php?upload=success");
+                $sql = "UPDATE profile_img SET status=1 WHERE user_id='$id';";
+                $result = mysqli_query($conn, $sql);
+
+
+
+                header("Location: ../upload-profile.php?upload=success");
             } else {    
                 header("Location: ../uploads.php?upload=fileerror");
             }

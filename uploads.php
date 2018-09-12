@@ -1,7 +1,5 @@
 <?php
     include "includes/header.php";
-
-
 ?>
 <div class="container" style="margin:100px">
 <div class="row">

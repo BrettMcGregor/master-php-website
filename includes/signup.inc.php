@@ -1,6 +1,5 @@
 <?php
 
-
 if (isset($_POST['submit'])) {
     // refer the database connection
     include_once 'db.inc.php';
@@ -41,21 +40,37 @@ if (isset($_POST['submit'])) {
                     $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd) VALUES (?, ?, ?, ?, ?);";
                     $stmt = mysqli_stmt_init($conn);
                     // handle error with statement prepare
-                    if (!mysqli_stmt_prepare($stmt, $sql)) {
-                        echo "SQL Error";
-                    } 
-                    else {
-                        // Insert new user into database
-                        // Hash the password
-                        $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-                        // Bind parameters to the placeholder(s)
-                        // "sssss" placeholders in the function here, correspond to the placeholders in the sql query
-                        mysqli_stmt_bind_param($stmt, "sssss", $first, $last, $email, $uid, $hashedPwd);
-                        // Run parameters inside database
-                        mysqli_stmt_execute($stmt);
-                        header("Location: ../index.php?signup=success");
-                        exit();
-                    }  
+                        if (!mysqli_stmt_prepare($stmt, $sql)) {
+                            echo "SQL Error";
+                        } 
+                        else {
+                            // Insert new user into database
+                            // Hash the password
+                            $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+                            // Bind parameters to the placeholder(s)
+                            // "sssss" placeholders in the function here, correspond to the placeholders in the sql query
+                            mysqli_stmt_bind_param($stmt, "sssss", $first, $last, $email, $uid, $hashedPwd);
+                            // Run parameters inside database
+                            mysqli_stmt_execute($stmt);
+
+                            // Insert user data into profile_img table
+                            $sql = "SELECT * FROM users WHERE user_uid='$uid' AND user_first='$first'";
+                            $result = mysqli_query($conn, $sql);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    $user_id = $row['user_id'];
+                                    $sql = "INSERT INTO profile_img (user_id, status)
+                                    VALUES ('$user_id', 0);";
+                                    mysqli_query($conn, $sql);
+                            } 
+
+                            header("Location: ../index.php?signup=success");
+                            exit();
+                        }
+                    
+                    }
+                    
                 } 
             }
         }
