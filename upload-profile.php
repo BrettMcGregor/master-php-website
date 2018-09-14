@@ -3,6 +3,9 @@
     include_once "includes/db.inc.php";
 
 ?>
+<head>
+<title>Update Profile Image</title>
+</head>
 <div class="container" style="margin:100px">
 <div class="row">
         <div class='col-4'>
@@ -18,13 +21,18 @@ if(isset($_SESSION['u_id'])) {
             $sqlImg = "SELECT * FROM profile_img WHERE user_id='$user_id'";
             $resultImg = mysqli_query($conn, $sqlImg);
             while ($rowImg = mysqli_fetch_assoc($resultImg)) {
-                echo '<div class="container">';                    
+                echo '<div class="container">'; 
+                    // if no profile photo then use default image
                     if ($rowImg['status'] == 0) {
-                        echo "<img src='uploads/default_user.png' class='img-thumbnail'>";
+                        echo "<img src='includes/default_user.png' class='img-thumbnail'>";
                     } else {
                         // use user profile image
+                        // locate the profile image - different file extensions
+                        $userImgPath = "uploads/profile".$user_id.".*";
+                        $userImg = glob($userImgPath)[0];
+                        
                         // add random extension to url to force browser to reload page
-                        echo "<img src='uploads/profile".$user_id.".jpg?".mt_rand()." class='img-thumbnail'>";
+                        echo "<img src='".$userImg."?".mt_rand()." class='img-thumbnail' width='75%' height='75%'>";
                     };
                 echo '</div>';
             }
@@ -37,12 +45,16 @@ if(isset($_SESSION['u_id'])) {
     if(isset($_SESSION['u_id'])) {
         echo "<div class='alert alert-info'>You are logged in as ".$_SESSION['u_first'].".</div>";
 
+        // Upload Profile Image Form
     echo '<h2>Upload a Profile Image</h2>
-    <form action="includes/upload.inc.php" method="POST" enctype="multipart/form-data">
-        <input type="file" class="form-control-file" name="file"><br>
-        <button type="submit" class="btn btn-primary" name="submit">UPLOAD</button>
-    </form>
-    <br>';
+        <form action="includes/upload-profile.inc.php" method="POST" enctype="multipart/form-data">
+            <input type="file" class="form-control-file" name="file">
+            <button type="submit" class="btn btn-primary" name="submit">Upload</button>
+        </form>
+        <h2>Delete Profile Image</h2>
+        <form action="includes/delete_profile.inc.php" method="POST">
+            <button type="submit" class="btn btn-primary" name="submit">Delete Profile Image</button>
+        </form>';
     } else {
         echo "<div>Upload form only appears once user is logged in.</div><br>
         <a class='btn btn-primary' href='index.php' role='button'>Login</button>";
