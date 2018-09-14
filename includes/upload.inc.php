@@ -1,5 +1,7 @@
 <?php
-
+session_start();
+include_once 'db.inc.php';
+$id = $_SESSION['u_id']; // unique user identifier
 
 if (!isset($_POST['submit'])) {
     echo "Error.";
@@ -18,20 +20,21 @@ if (!isset($_POST['submit'])) {
     $fileExt = explode('.', $fileName);
     $fileActualExt = strtolower(end($fileExt));
 
-    $allowed = array('jpg', 'jpeg', 'png', 'pdf');
+    $allowed = array('jpg', 'jpeg', 'png');
+
 
     if (in_array($fileActualExt, $allowed)) {
         if ($fileSize < 512000) {
             if ($fileError === 0) {
-                // now upload the file
+                 // OK now go ahead and upload the new image
                 // give the file a unique name to prevent duplicates/overwrite
-                $fileNameNew = uniqid('', TRUE).".".$fileActualExt;
+                $fileNameNew = $id."_".uniqid('', TRUE).".".$fileActualExt;
                 // set up upload destination
                 $fileDestination = "../uploads/".$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDestination);
                 header("Location: ../uploads.php?upload=success");
-            } else {    
-                header("Location: ../uploads.php?upload=fileerror");
+            } else {
+                header("Location: ../uploads.php?upload=fileerror"); 
             }
         } else {
             header("Location: ../uploads.php?upload=large");
@@ -40,7 +43,4 @@ if (!isset($_POST['submit'])) {
         header("Location: ../uploads.php?upload=type");
     }
 }
-    
-
-
 ?>

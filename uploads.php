@@ -1,8 +1,9 @@
 <?php
     include "includes/header.php";
-
-
 ?>
+<head>
+<title>Upload and Delete Files</title>
+</head>
 <div class="container" style="margin:100px">
 <div class="row">
         <div class='col-4'>
@@ -14,6 +15,26 @@
 <br>
 <?php
 
+// get an array of files in the uploads directory. this is used to populate the select form element
+$array = array_slice(scandir("uploads/"), 2);
+?>
+
+<!-- Delete File Form -->
+    <h2>Delete File(s)</h2>
+        <form action="includes/delete-file.inc.php" method="POST">
+        <select name="files[]" size="10" multiple>
+           <?php foreach($array as $option) {
+               ?><option value="<?php echo $option;?>"><?php echo $option; ?></option><?php
+           }
+           ?>
+            </select>
+            <button type="submit" class="btn btn-primary" name="submit">Delete</button>
+        </form>
+        </div>
+        </div>
+
+
+<?php
 if (!isset($_GET['upload'])) {
     exit();
 } else {
@@ -35,8 +56,10 @@ if (!isset($_GET['upload'])) {
         echo "<p class='alert alert-success'>File upload successful!</p>";
         exit();
     }
+    
 
 }
+
 
 ?>
 </div>
