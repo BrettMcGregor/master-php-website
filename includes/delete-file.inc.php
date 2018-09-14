@@ -6,7 +6,7 @@ print_r($files);
 
 // can then do a loop to delete each file in turn
 foreach ($_POST['files'] as $selection)
-    if (!unlink("../uploads/".$selection)) {
+    if (!unlink("../".$selection)) {
         # error message
         echo 'There was an error.';
     } else {

@@ -15,15 +15,26 @@
 <br>
 <?php
 
+if (!isset($_SESSION['u_id'])) {
+    exit();
+} else {
+    $id = $_SESSION['u_id'];
+}
+
 // get an array of files in the uploads directory. this is used to populate the select form element
 $array = array_slice(scandir("uploads/"), 2);
+
+// create an array of files that the user has uploaded
+$userPath = "uploads/".$id."_*";
+$userFiles = glob($userPath);
+
 ?>
 
 <!-- Delete File Form -->
     <h2>Delete File(s)</h2>
         <form action="includes/delete-file.inc.php" method="POST">
         <select name="files[]" size="10" multiple>
-           <?php foreach($array as $option) {
+           <?php foreach($userFiles as $option) {
                ?><option value="<?php echo $option;?>"><?php echo $option; ?></option><?php
            }
            ?>
