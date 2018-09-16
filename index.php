@@ -1,6 +1,6 @@
 <?php
     include "includes/header.php";
-
+    include_once "includes/db.inc.php";
 ?>
 <head>
     <title>Home/Login</title>
@@ -15,6 +15,38 @@ if (isset($_SESSION['u_id'])) {
     '<form action="includes/logout.inc.php" method="POST">';
     echo '<div class="alert alert-success">'.$_SESSION["u_first"].', you are logged in.</div>';
     echo '<button type="submit" class="btn btn-primary" name="submit">Logout</button>';
+
+    ?>  
+<div class="container">
+<h1>Latest News</h1>
+    <h2>All articles</h2>
+    <hr>
+    </div>
+    </div>
+    <div class="container">
+    <?php
+    $sql = "SELECT * FROM article";
+    $result = mysqli_query($conn, $sql);
+
+    $queryResult = mysqli_num_rows($result);
+    if ($queryResult > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "<div>
+            <h3>".$row['a_title']."</h3>
+            <p>".$row['a_text']."</p>
+            <p>".$row['a_date']."</p>
+            <p>".$row['a_author']."</p>
+            <hr>
+            </div>";
+            
+        }
+    } else {
+        echo "The query returned no results.";
+    }
+
+    ?>
+</div>
+<?php
 } else {
     echo '
     <form action="includes/login.inc.php" method="POST">
@@ -62,10 +94,12 @@ if (!isset($_GET['login'])) {
     }
 }
 ?>
+
         </div>
     </div>
-</div>
+
   
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
