@@ -2,18 +2,20 @@
     include "includes/header.php";
 ?>
 <head>
-<title>Upload and Delete Files</title>
+    <title>Upload and Delete Files</title>
 </head>
 <div class="container" style="margin:100px">
-<div class="row">
-        <div class='col-4'>
+    <div class="row">
+        <div class="col-6">
 <h2>Upload a File</h2>
 <form action="includes/upload.inc.php" method="POST" enctype="multipart/form-data">
     <input type="file" class="form-control-file" name="file"><br>
     <button type="submit" class="btn btn-primary" name="submit">UPLOAD</button>
 </form>
-<br>
+</div>
+
 <?php
+
 
 if (!isset($_SESSION['u_id'])) {
     exit();
@@ -29,20 +31,27 @@ $userPath = "uploads/".$id."_*";
 $userFiles = glob($userPath);
 
 ?>
-
 <!-- Delete File Form -->
+
+<div class="row">
+        <div class="col-6">
     <h2>Delete File(s)</h2>
-        <form action="includes/delete-file.inc.php" method="POST">
+    <form action="includes/delete-file.inc.php" method="POST">
         <select name="files[]" size="10" multiple>
-           <?php foreach($userFiles as $option) {
-               ?><option value="<?php echo $option;?>"><?php echo $option; ?></option><?php
-           }
-           ?>
-            </select>
-            <button type="submit" class="btn btn-primary" name="submit">Delete</button>
-        </form>
-        </div>
-        </div>
+            <?php foreach($userFiles as $option) {
+                ?><option value="<?php echo $option;?>"><?php echo $option; ?></option><?php
+            }
+            ?>
+        </select>
+        <button type="submit" class="btn btn-primary" name="submit">Delete</button>
+    </form>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+    <div class="row">
+        <!-- <div class="col-6"> -->
 
 
 <?php
@@ -73,6 +82,7 @@ if (!isset($_GET['upload'])) {
 
 
 ?>
-</div>
-</div>
-</div>
+
+
+</body>
+</html>
