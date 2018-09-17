@@ -5,7 +5,7 @@
 <head>
     <title>Home/Login</title>
 </head>
-<div class="container" style="margin:100px">
+<div class="container" style="margin-top:100px">
     <div class="row">
         <div class='col-4'>
             <h2>Login</h2>
