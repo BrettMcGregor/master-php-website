@@ -42,6 +42,7 @@
               <a class="dropdown-item" href="uploads.php">Upload and Delete Files</a>
               <a class="dropdown-item" href="upload-profile.php">Update Profile Image</a>
               <a class="dropdown-item" href="contact.php">Contact Form</a>
+              <a class="dropdown-item" href="random-string.php">Random String</a>
             </div>
           </li>
         </ul>
