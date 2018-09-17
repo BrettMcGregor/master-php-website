@@ -41,13 +41,13 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="uploads.php">Upload and Delete Files</a>
               <a class="dropdown-item" href="upload-profile.php">Update Profile Image</a>
-              <a class="dropdown-item" href="#.php">Something Else</a>
+              <a class="dropdown-item" href="contact.php">Contact Form</a>
             </div>
           </li>
         </ul>
         <form action="search-results.php" class="form-inline my-2 my-lg-0" method="POST">
           <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type = "submit" name="submit-search">Search</button>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="submit-search">Search</button>
         </form>
       </div>
     </nav>
